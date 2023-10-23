@@ -10,12 +10,14 @@ local function GreatVault_GetActivities(activityType)
 	return activities
 end
 
-local function GreatVault_AggregateRewards(characterName,level,className, realm, activities)
+local function GreatVault_AggregateRewards(activities)
     local character = {
-        characterName = characterName;
-        level = level;
-        className = className;
-        realm = realm;
+        characterName = UnitName("player");
+        level = UnitLevel("player");
+        className = UnitClass("player");
+        faction = UnitFactionGroup("player");
+        itemLevel = math.floor(GetAverageItemLevel());
+        realm = GetRealmName();
         mythic = 0;
         raid = 0;
         pvp = 0;
@@ -45,10 +47,9 @@ end
 function GreatVault_saveCurrentCharacter()
     local level = UnitLevel("player")
     if level == 70 then
-        local characterName = UnitName("player")
-        local realmName = GetRealmName()
-        local className = UnitClass("player")
         local activites = GreatVault_GetAllActivities()
-        GreatVaultDatabase[realmName][characterName] = GreatVault_AggregateRewards(characterName,level,className, realmName, activites)
+        local characterName = UnitName("player");
+        local realmName = GetRealmName();
+        GreatVaultDatabase[realmName][characterName] = GreatVault_AggregateRewards(activites)
     end
 end

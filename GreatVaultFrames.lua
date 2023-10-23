@@ -1,4 +1,4 @@
-local headerRows = {"Character","Level","Class","Realm","Mythic","Raid","PVP"}
+local headerRows = {"Character","Level","Class","Faction","Item Level","Realm","Mythic","Raid","PVP"}
 local stillLoading = true
 local tableContent
 local CELL_WIDTH = 100
@@ -116,7 +116,16 @@ GreatVault_fillTableContent = function()
     for realmName,realmCharacters in pairs(GreatVaultDatabase) do
         for characterName, characterInfo in pairs(realmCharacters) do
             GreatVault_createRow(i + 1)
-            GreatVault_createCells(i + 1,{characterName,characterInfo.level, characterInfo.className,realmName, characterInfo.mythic.."/3", characterInfo.raid.."/3", characterInfo.pvp.."/3"})
+            GreatVault_createCells(i + 1,{
+                characterName,characterInfo.level,
+                characterInfo.className,
+                characterInfo.faction,
+                characterInfo.itemLevel,
+                realmName,
+                characterInfo.mythic.."/3", 
+                characterInfo.raid.."/3", characterInfo
+                .pvp.."/3"
+            })
             i = i + 1
         end
     end
