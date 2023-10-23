@@ -22,13 +22,14 @@ local function GreatVault_AggregateRewards(activities)
         raid = 0;
         pvp = 0;
     };
+    
     for _,activity in pairs(activities) do
         if(activity.currentItemLevel) then
-            if (activity.type ==1 ) then
+            if (activity.type == Enum.WeeklyRewardChestThresholdType.MythicPlus) then
                 character.mythic = character.mythic + 1
-            elseif(activity.type == 2) then
+            elseif(activity.type == Enum.WeeklyRewardChestThresholdType.RankedPvP) then
                 character.pvp = character.pvp + 1;
-            elseif(activity.type == 3) then
+            elseif(activity.type == Enum.WeeklyRewardChestThresholdType.Raid) then
                 character.raid = character.raid + 1
             end
         end
@@ -37,9 +38,9 @@ local function GreatVault_AggregateRewards(activities)
 end
 
 local function GreatVault_GetAllActivities()
-    local finalActivities = GreatVault_GetActivities(1)
-    for k, v in pairs(GreatVault_GetActivities(2)) do table.insert(finalActivities, v) end
-    for k, v in pairs(GreatVault_GetActivities(3)) do table.insert(finalActivities, v) end
+    local finalActivities = GreatVault_GetActivities(Enum.WeeklyRewardChestThresholdType.MythicPlus)
+    for k, v in pairs(GreatVault_GetActivities(Enum.WeeklyRewardChestThresholdType.RankedPvP)) do table.insert(finalActivities, v) end
+    for k, v in pairs(GreatVault_GetActivities(Enum.WeeklyRewardChestThresholdType.Raid)) do table.insert(finalActivities, v) end
     return finalActivities;
 end
 
