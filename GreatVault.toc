@@ -1,0 +1,9 @@
+## Interface: 100107
+## Title: GreatVault
+## Notes: Small Addon Description
+## Author: Your Name
+## Version: @project-version@
+## SavedVariables: GreatVaultDatabase
+
+GreatVaultFrames.lua
+GreatVault.lua
